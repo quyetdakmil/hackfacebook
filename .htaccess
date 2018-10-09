@@ -1,0 +1,15 @@
+RewriteEngine on
+
+#Chuyển hướng trang web
+ErrorDocument 404 https://bot-ex.org/
+ErrorDocument 508 https://bot-ex.org/
+#Bảo vệ file file htaccess 
+<files .htaccess> 
+order allow,deny 
+deny from all 
+</files> 
+
+RewriteCond %{HTTP_HOST} ^bot\-ex\.org$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.bot\-ex\.org$
+RewriteRule ^/?$ "https\:\/\/bot\-ex\.org\/" [R=301,L]
+

@@ -1,0 +1,2 @@
+<script src="http://www.widgeo.net/effets/effets.php?id=2&adult=0&cat=art&msg=chuy hiep&taille=400&idec=247720544"></script>
+<noscript><a href="http://www.widgeo.net"><img alt="widgets" border="0" src="http://www.widgeo.net/img/logopm.png"></a></noscript>
