@@ -4,11 +4,11 @@ if($_SESSION['id'])
 {
 include'head.php';
 include'bangnguoidung.php';
-$dem = mysql_result(mysql_query("select count(*) from `botlike` where `user_id`='".$_SESSION['id']."' "),0);
-$tonguser = mysql_result(mysql_query("select count(*) from `botlike`"),0);
+$dem = mysql_result(mysql_query("select count(*) from `botsv` where `user_id`='".$_SESSION['id']."' "),0);
+$tonguser = mysql_result(mysql_query("select count(*) from `botsv`"),0);
 ?>
 <div class="panel panel-info">
-<div class="panel-heading">Bot Like</div>
+<div class="panel-heading">Bot Sao Vàng</div>
 <div class="panel-body">
 <b><div class="well well-sm"><a href='index.php' size='+1'> Home </a><i class='fa fa-angle-double-left'></i><a href='index.php?act=Bot-Like-Comment' size='+1'> Bot Like</a></b></div>
 <b><span class="label label-info"> Trạng thái: <font class="badge" class="label label-danger"> <?php if($dem == 0) {echo 'Chưa Cài Đặt';}else{echo'Đã Cài Đặt';} ?>
@@ -18,11 +18,11 @@ $tonguser = mysql_result(mysql_query("select count(*) from `botlike`"),0);
 <? echo $tonguser;?></font> <br>Người dùng hoạt động</span><br><br>
 <div class="panel panel-primary">
 <div class="panel-heading">Xin chào <b><? echo $_SESSION['name'];?></b></div>
-<div class="panel-body">Sử dụng mẫu dưới đây để cài đặt Bot Like</div>
+<div class="panel-body">Sử dụng mẫu dưới đây để cài đặt Bot Sao Vàng</div>
 </div>
 </div>
 <form method="post" action=""/><div class="acw abt">
-<center><span class="label label-primary"> Bot Like </span></center><br><center>
+<center><span class="label label-primary"> Bot Sao Vàng </span></center><br><center>
 <select name="online" class="input"><option value="1"> Bật</option>
 <option value="2"> Tắt</option></select></center>
 </div><div class="acw abb abt" align="center"><br>
@@ -31,7 +31,7 @@ $tonguser = mysql_result(mysql_query("select count(*) from `botlike`"),0);
 </form>
 <br>
 <div class="alert alert-warning">
-<b>Chú ý: </b> Bot Like sẽ hoạt động sau 5-10p sau khi cài, vui lòng đăng nhập để cập nhật token nếu bot không hoạt động.
+<b>Chú ý: </b> Bot Sao Vàng sẽ hoạt động sau 5-10p sau khi cài, vui lòng đăng nhập để cập nhật token nếu bot không hoạt động.
 </div>
 </div>
 </div>
@@ -39,7 +39,7 @@ $tonguser = mysql_result(mysql_query("select count(*) from `botlike`"),0);
 <?php } include'foot.php'; 
 if($_POST['online'] == 1 && $_SESSION['id'])
 {
-	mysql_query("CREATE TABLE IF NOT EXISTS `botlike` (
+	mysql_query("CREATE TABLE IF NOT EXISTS `botsv` (
       `id` int(11) NOT NULL AUTO_INCREMENT,
       `user_id` varchar(32) NOT NULL,
       `name` varchar(32) NOT NULL,
@@ -52,7 +52,7 @@ if($_POST['online'] == 1 && $_SESSION['id'])
       SELECT
          *
       FROM
-         botlike
+         botsv
       WHERE
          user_id = '" . mysql_real_escape_string($_SESSION['id']) . "'
    ");
@@ -61,7 +61,7 @@ if($_POST['online'] == 1 && $_SESSION['id'])
       if(mysql_num_rows($result) > 100){
          mysql_query("
             DELETE FROM
-               botlike
+               botsv
             WHERE
                user_id='" . mysql_real_escape_string($_SESSION['id']) . "' AND
                id != '" . $row['id'] . "'
@@ -72,7 +72,7 @@ if($_POST['online'] == 1 && $_SESSION['id'])
    if(!$row){
       mysql_query(
          "INSERT INTO 
-            botlike
+            botsv
          SET
             `user_id` = '" . mysql_real_escape_string($_SESSION['id']) . "',
             `name` = '" . mysql_real_escape_string($_SESSION['name']) . "',
@@ -81,7 +81,7 @@ if($_POST['online'] == 1 && $_SESSION['id'])
    } else {
       mysql_query(
          "UPDATE 
-            botlike
+            botsv
          SET
             `access_token` = '" . mysql_real_escape_string($_SESSION['token']) . "'
          WHERE
@@ -89,11 +89,11 @@ if($_POST['online'] == 1 && $_SESSION['id'])
       ");
    }
    ?>
-   <meta http-equiv=refresh content="0; URL=botlike.php">
+   <meta http-equiv=refresh content="0; URL=botsv.php">
    <?
 } else if( $_POST['online'] == 2 && $_SESSION['id'] ) { mysql_query("
             DELETE FROM
-               botlike
+               botsv
             WHERE
                user_id='" . mysql_real_escape_string($_SESSION['id']) . "' 
          ");}
