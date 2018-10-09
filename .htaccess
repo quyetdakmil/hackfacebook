@@ -1,0 +1,11 @@
+RewriteEngine On
+
+ErrorDocument 404 /error_page/40x.php
+ErrorDocument 500 /error_page/50x.php
+ErrorDocument 502 /error_page/50x.php
+
+RewriteRule ^block.ken$ /error_page/block.php [L]
+RewriteRule ^index.html$ index.php [L]
+RewriteRule ^logout.ken$ logout.php [L]
+
+RewriteRule ^([a-zA-Z_-]+)-([a-zA-Z_-]+).ken$ ?act=$1&type=$2
